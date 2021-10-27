@@ -29,7 +29,7 @@ public class Frame {
     /**
      * Define current system, the default is windows
      */
-    private static boolean IS_WINDOWS = true;
+    private static boolean IS_WINDOWS = false;
     private static boolean IS_MAC_OS = false;
 
     /**
@@ -42,7 +42,7 @@ public class Frame {
      * The file path notation, the default is windows, if current system is MacOs, it will be '/'
      *
      */
-    public static String FILE_PATH_NOTATION = "\\";
+    public static String FILE_PATH_NOTATION = null;
 
     /**
      * The pdf absolute file path
@@ -67,17 +67,6 @@ public class Frame {
     private JComboBox select;
 
     public static void main(String[] args) throws IOException {
-        // get system info
-        String osName = System.getProperty("os.name");
-        if (osName.startsWith("Mac OS")) {
-            IS_MAC_OS = true;
-            FILE_PATH_NOTATION = "/";
-        } else if (osName.startsWith("Windows")) {
-            IS_WINDOWS = true;
-        } else {
-            // unix or linux
-        }
-
         // init frame
         JFrame frame = new JFrame("Excel to PDF");
         frame.setSize(575, 400);
@@ -171,6 +160,19 @@ public class Frame {
      */
     private static void generatePdf(String excelFilePath, String pdfDirPath, String selectedStr) {
         try {
+            // get system info
+            if ( FILE_PATH_NOTATION == null) {
+                String osName = System.getProperty("os.name");
+                if (osName.startsWith("Windows")) {
+                    IS_WINDOWS = true;
+                    FILE_PATH_NOTATION = "\\";
+                } else {
+                    // MacOs, linux
+                    IS_MAC_OS = true;
+                    FILE_PATH_NOTATION = "/";
+                }
+            }
+
             // Reset type
             IS_STUDENT_DESC_TYPE = false;
             IS_INTERNAL_CHECK_TYPE = false;
