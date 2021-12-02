@@ -132,8 +132,8 @@ public class Frame {
                     return;
                 }
 
-                if (" Select excel file...".equalsIgnoreCase(excelFilePath)) {
-                    JOptionPane.showMessageDialog(null, "Please select excel file.", "Warning", 2);
+                if (" Select a folder or excel file...".equalsIgnoreCase(excelFilePath)) {
+                    JOptionPane.showMessageDialog(null, "Please select a folder or excel file.", "Warning", 2);
                     return;
                 }
                 if (" Select a folder to save pdf...".equalsIgnoreCase(pdfDirPath)) {
@@ -182,7 +182,7 @@ public class Frame {
                 IS_STUDENT_DESC_TYPE = true;
             } else if ("Project Descriptions for Internal Check".equalsIgnoreCase(selectedStr)) {
                 IS_INTERNAL_CHECK_TYPE = true;
-                pdfFileName = "Project descriptions Computer Science";
+                pdfFileName = "Project_Descriptions_Computer_Science";
             }
 
             // gen pdf absolute path
@@ -237,6 +237,26 @@ public class Frame {
     }
 
     /**
+     * Filter excel file<br>
+     *
+     * @param [file]
+     * @return boolean
+     * @author Zihao Long
+     */
+    public static boolean filterExcelFile(File file) {
+        String fileName = file.getName().toLowerCase();
+        if (fileName.endsWith("csv")
+                || fileName.endsWith("xls")
+                || fileName.endsWith("xlsx")) {
+            if (fileName.startsWith(".")) {
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * show excel file dialog<br>
      *
      * @param [type]
@@ -250,22 +270,19 @@ public class Frame {
         fileChooser.addChoosableFileFilter(new FileFilter() {
             @Override
             public boolean accept(File file) {
-                String fileName = file.getName().toLowerCase();
-                if (fileName.endsWith("csv")
-                        || fileName.endsWith("xls")
-                        || fileName.endsWith("xlsx")) {
+                if (file.isDirectory()) {
                     return true;
                 }
-                return false;
+                return filterExcelFile(file);
             }
 
             @Override
             public String getDescription() {
-                return "excel file (*.csv, *.xls, *.xlsx)";
+                return "folder or excel file (*.csv, *.xls, *.xlsx)";
             }
         });
 
-        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
         fileChooser.setMultiSelectionEnabled(false);
         fileChooser.showDialog(new JLabel(), "select");
         File file = fileChooser.getSelectedFile();

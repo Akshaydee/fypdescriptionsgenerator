@@ -7,10 +7,12 @@ import cn.afterturn.easypoi.excel.annotation.Excel;
 import cn.afterturn.easypoi.excel.entity.ImportParams;
 import common.exception.BusinessException;
 import common.pojo.ProjectInfo;
+import gui.Frame;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Field;
@@ -38,18 +40,32 @@ public class ExcelUtils {
         }
 
         try {
-            List<T> dataList;
-            if (filePath.endsWith(".csv")) {
-                CsvImportParams params = new CsvImportParams();
-                params.setTitleRows(titleRows);
-                params.setHeadRows(headerRows);
-                dataList = CsvImportUtil.importCsv(new FileInputStream(new File(filePath)), pojoClass, params);
-            } else {
-                ImportParams params = new ImportParams();
-                params.setTitleRows(titleRows);
-                params.setHeadRows(headerRows);
-                dataList = ExcelImportUtil.importExcel(new File(filePath), pojoClass, params);
+            File inputFile = new File(filePath);
+            File[] files = new File[]{inputFile};
+            if (inputFile.isDirectory()) {
+                files = inputFile.listFiles(new FileFilter() {
+                    @Override
+                    public boolean accept(File file) {
+                        return Frame.filterExcelFile(file);
+                    }
+                });
             }
+            List<T> dataList = new ArrayList<>();
+            for (File file : files) {
+                System.out.println(file.getPath());
+                if (file.getPath().endsWith(".csv")) {
+                    CsvImportParams params = new CsvImportParams();
+                    params.setTitleRows(titleRows);
+                    params.setHeadRows(headerRows);
+                    dataList.addAll(CsvImportUtil.importCsv(new FileInputStream(file), pojoClass, params));
+                } else {
+                    ImportParams params = new ImportParams();
+                    params.setTitleRows(titleRows);
+                    params.setHeadRows(headerRows);
+                    dataList.addAll(ExcelImportUtil.importExcel(file, pojoClass, params));
+                }
+            }
+
             if (CollectionUtils.isEmpty(dataList)) {
                 throw new BusinessException("The excel content is empty.");
             }
