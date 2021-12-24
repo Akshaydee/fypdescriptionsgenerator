@@ -1,5 +1,6 @@
 package gui;
 
+import common.constant.Constant;
 import common.exception.BusinessException;
 import common.pojo.ProjectInfo;
 import common.uitils.ExcelUtils;
@@ -25,31 +26,6 @@ import java.util.Scanner;
  * @since excelToPdf 0.0.1
  */
 public class Frame {
-
-    /**
-     * Define current system, the default is windows
-     */
-    private static boolean IS_WINDOWS = false;
-    private static boolean IS_MAC_OS = false;
-
-    /**
-     * Define the PDF types
-     */
-    public static boolean IS_STUDENT_DESC_TYPE = false;
-    public static boolean IS_INTERNAL_CHECK_TYPE = false;
-
-    /**
-     * The file path notation, the default is windows, if current system is MacOs, it will be '/'
-     *
-     */
-    public static String FILE_PATH_NOTATION = null;
-
-    /**
-     * The pdf absolute file path
-     */
-    public static String PDF_FILE_PATH;
-
-    public static Logger logger = Logger.getLogger(Frame.class);
 
     /**
      * GUI info
@@ -161,60 +137,60 @@ public class Frame {
     private static void generatePdf(String excelFilePath, String pdfDirPath, String selectedStr) {
         try {
             // get system info
-            if ( FILE_PATH_NOTATION == null) {
+            if ( Constant.FILE_PATH_NOTATION == null) {
                 String osName = System.getProperty("os.name");
                 if (osName.startsWith("Windows")) {
-                    IS_WINDOWS = true;
-                    FILE_PATH_NOTATION = "\\";
+                    Constant.IS_WINDOWS = true;
+                    Constant.FILE_PATH_NOTATION = "\\";
                 } else {
                     // MacOs, linux
-                    IS_MAC_OS = true;
-                    FILE_PATH_NOTATION = "/";
+                    Constant.IS_MAC_OS = true;
+                    Constant.FILE_PATH_NOTATION = "/";
                 }
             }
 
             // Reset type
-            IS_STUDENT_DESC_TYPE = false;
-            IS_INTERNAL_CHECK_TYPE = false;
+            Constant.IS_STUDENT_DESC_TYPE = false;
+            Constant.IS_INTERNAL_CHECK_TYPE = false;
 
             String pdfFileName = "CS_Projects";
             if ("Project Descriptions for Students".equalsIgnoreCase(selectedStr)) {
-                IS_STUDENT_DESC_TYPE = true;
+                Constant.IS_STUDENT_DESC_TYPE = true;
             } else if ("Project Descriptions for Internal Check".equalsIgnoreCase(selectedStr)) {
-                IS_INTERNAL_CHECK_TYPE = true;
+                Constant.IS_INTERNAL_CHECK_TYPE = true;
                 pdfFileName = "Project_Descriptions_Computer_Science";
             }
 
             // gen pdf absolute path
-            PDF_FILE_PATH = pdfDirPath + FILE_PATH_NOTATION + pdfFileName + ".pdf";
+            Constant.PDF_FILE_PATH = pdfDirPath + Constant.FILE_PATH_NOTATION + pdfFileName + ".pdf";
 
-            logger.info("Reading excel file...");
+            Constant.logger.info("Reading excel file...");
 
             // Read data from excel
             List<ProjectInfo> dataList = ExcelUtils.importExcelForPdf(excelFilePath, 0, 1);
 
 
-            logger.info("Parsing excel data successfully...");
-            logger.info("Generating PDF file...");
+            Constant.logger.info("Parsing excel data successfully...");
+            Constant.logger.info("Generating PDF file...");
 
             // Generate pdf
             PdfGenerator.genPdf(dataList);
 
-            logger.info("SUCCESS!!!");
+            Constant.logger.info("SUCCESS!!!");
 
             // Ask if open file
             int confirmResult = JOptionPane.showConfirmDialog(null, "PDF has been generated! Open it?", "Prompt", 0);
             if (confirmResult == 1) {
                 return;
             }
-            openFile(PDF_FILE_PATH);
+            openFile(Constant.PDF_FILE_PATH);
         } catch (Exception e) {
             if (e instanceof BusinessException) {
                 JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 //            e.printStackTrace();
-            logger.error(e.getMessage());
+            Constant.logger.error(e.getMessage());
         }
     }
 
@@ -226,10 +202,10 @@ public class Frame {
      * @author Zihao Long
      */
     private static void openFile(String filePath) throws IOException {
-        if (IS_WINDOWS) {
+        if (Constant.IS_WINDOWS) {
             Runtime.getRuntime().exec("explorer.exe /select, " + filePath);
             return;
-        } else if (IS_MAC_OS) {
+        } else if (Constant.IS_MAC_OS) {
             Runtime.getRuntime().exec("open " + filePath);
             return;
         }

@@ -13,12 +13,11 @@ import com.itextpdf.layout.property.TextAlignment;
 import common.constant.Constant;
 import common.pojo.ProjectInfo;
 import common.uitils.PdfUtils;
-import gui.Frame;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 
 /**
  * The pdf generator<br>
@@ -38,12 +37,12 @@ public class PdfGenerator {
      */
     public static void genPdf(List<ProjectInfo> dataList) throws Exception {
 
-        File file = new File(Frame.PDF_FILE_PATH);
+        File file = new File(Constant.PDF_FILE_PATH);
         file.getParentFile().mkdirs();
 
-        if (Frame.IS_STUDENT_DESC_TYPE) {
+        if (Constant.IS_STUDENT_DESC_TYPE) {
             genStudentDescPdf(dataList);
-        } else if (Frame.IS_INTERNAL_CHECK_TYPE) {
+        } else if (Constant.IS_INTERNAL_CHECK_TYPE) {
             genInternalCheckPdf(dataList);
         }
     }
@@ -56,7 +55,7 @@ public class PdfGenerator {
      * @author Zihao Long
      */
     private static void genInternalCheckPdf(List<ProjectInfo> dataList) throws Exception {
-        PdfDocument pdfDoc = new PdfDocument(new PdfWriter(Frame.PDF_FILE_PATH));
+        PdfDocument pdfDoc = new PdfDocument(new PdfWriter(Constant.PDF_FILE_PATH));
         Document doc = new Document(pdfDoc);
         doc.setMargins(10, 50, 0, 50);
 
@@ -203,7 +202,7 @@ public class PdfGenerator {
      * @author Zihao Long
      */
     private static void genStudentDescPdf(List<ProjectInfo> dataList) throws Exception {
-        PdfDocument pdfDoc = new PdfDocument(new PdfWriter(Frame.PDF_FILE_PATH));
+        PdfDocument pdfDoc = new PdfDocument(new PdfWriter(Constant.PDF_FILE_PATH));
         Document doc = new Document(pdfDoc);
         doc.setMargins(20, 10, 20, 10);
 
