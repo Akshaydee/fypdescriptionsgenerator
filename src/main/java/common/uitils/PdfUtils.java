@@ -12,7 +12,7 @@ import com.itextpdf.layout.property.BorderRadius;
 import com.itextpdf.layout.property.TextAlignment;
 import common.constant.Constant;
 import org.apache.commons.lang3.StringUtils;
-import service.PdfGenerator;
+import service.PdfService;
 
 import java.io.IOException;
 
@@ -55,7 +55,7 @@ public class PdfUtils {
      */
     public static PdfFont genWingdingsFont () {
         try {
-            String projectPath = PdfGenerator.class.getResource("/").toString();
+            String projectPath = PdfService.class.getResource("/").toString();
             String wingdingsFontPath = projectPath + Constant.FILE_PATH_NOTATION + "font" + Constant.FILE_PATH_NOTATION + "Wingdings.ttf";
             return PdfFontFactory.createFont(wingdingsFontPath, PdfEncodings.IDENTITY_H, false);
         } catch (IOException e) {

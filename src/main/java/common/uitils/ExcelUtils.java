@@ -7,9 +7,9 @@ import cn.afterturn.easypoi.excel.annotation.Excel;
 import cn.afterturn.easypoi.excel.entity.ImportParams;
 import common.exception.BusinessException;
 import common.pojo.ProjectInfo;
-import gui.Frame;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import service.MyService;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -46,7 +46,7 @@ public class ExcelUtils {
                 files = inputFile.listFiles(new FileFilter() {
                     @Override
                     public boolean accept(File file) {
-                        return Frame.filterExcelFile(file);
+                        return MyService.filterExcelFile(file);
                     }
                 });
             }

@@ -4,6 +4,8 @@ import gui.Frame;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
+import java.util.ResourceBundle;
+
 /**
  * The Constant<br>
  *
@@ -12,6 +14,25 @@ import org.apache.log4j.Logger;
  * @since excelToPdf 0.0.1
  */
 public class Constant {
+
+
+    /**
+     * The text fields on frame
+     */
+    public static String YEAR_INPUT_LABEL;
+    public static String EXCEL_FILES_SELECTION;
+    public static String SAVE_FOLDER_SELECTION;
+    static {
+        ResourceBundle resource = ResourceBundle.getBundle("frame");
+        YEAR_INPUT_LABEL = resource.getString("year.input.label");
+        EXCEL_FILES_SELECTION = resource.getString("excel.files.selection");
+        SAVE_FOLDER_SELECTION = resource.getString("save.folder.selection");
+    }
+
+    /**
+     * The academic year entered from user interface
+     */
+    public static String ACADEMIC_YEAR = null;
 
     /**
      * Define current system, the default is windows
@@ -36,6 +57,13 @@ public class Constant {
      */
     public static String PDF_FILE_PATH;
 
+    /**
+     * The logger<br>
+     *
+     * @param 
+     * @return 
+     * @author Zihao Long
+     */
     public static Logger logger = Logger.getLogger(Frame.class);
     
     /**

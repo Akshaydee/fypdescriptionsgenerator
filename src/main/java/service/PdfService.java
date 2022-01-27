@@ -26,7 +26,7 @@ import java.util.*;
  * @version 1.0, 2021-09-28 04:34
  * @since excelToPdf 0.0.1
  */
-public class PdfGenerator {
+public class PdfService {
 
     /**
      * Generate pdf by data list and save to directory<br>
@@ -59,6 +59,7 @@ public class PdfGenerator {
         Document doc = new Document(pdfDoc);
         doc.setMargins(10, 50, 0, 50);
 
+        String pageTitle = "Project descriptions Computer Science " + Constant.ACADEMIC_YEAR;
         // define solid border
         SolidBorder solidBorder = new SolidBorder(new DeviceRgb(218, 218, 218), 1f);
         for (int i = 0; i < dataList.size(); i++) {
@@ -70,7 +71,7 @@ public class PdfGenerator {
             ProjectInfo data = dataList.get(i);
 
             // Add title for every page
-            PdfUtils.addTitle(doc, "Project descriptions Computer Science");
+            PdfUtils.addTitle(doc, pageTitle);
 
             // Add project title
             genLabelAndInput("Title", data.getProjectTitle(), solidBorder, doc);
@@ -224,7 +225,7 @@ public class PdfGenerator {
      */
     private static void genContentsPage(Document doc, List<ProjectInfo> dataList) {
 
-        PdfUtils.addHeader(doc, "Computer Science Projects 2021/22");
+        PdfUtils.addHeader(doc, "Computer Science Projects " + Constant.ACADEMIC_YEAR);
 
         Table table = new Table(new float[]{65f, 100f, 335f});
         table.setHorizontalAlignment(HorizontalAlignment.CENTER);
