@@ -15,7 +15,6 @@ import java.util.ResourceBundle;
  */
 public class Constant {
 
-
     /**
      * The text fields on frame
      */
