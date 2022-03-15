@@ -99,38 +99,52 @@ public class Frame {
         start_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                String academicYear = year_input.getText();
-                String excelFilePath = excel_input.getText();
-                String pdfDirPath = pdf_input.getText();
-                String selectedStr = (String) select.getSelectedItem();
+                try {
+                    String academicYear = year_input.getText();
+                    String excelFilePath = excel_input.getText();
+                    String savingFolderPath = pdf_input.getText();
+                    String selectedStr = (String) select.getSelectedItem();
 
-                if (StringUtils.isEmpty(academicYear)) {
-                    JOptionPane.showMessageDialog(null, "Please enter an academic year.", "Warning", 2);
-                    return;
+                    if (StringUtils.isEmpty(academicYear)) {
+                        JOptionPane.showMessageDialog(null, "Please enter an academic year.", "Warning", 2);
+                        return;
+                    }
+
+                    if ("Select a PDF type".equalsIgnoreCase(selectedStr)) {
+                        JOptionPane.showMessageDialog(null, "Please select a PDF type.", "Warning", 2);
+                        return;
+                    }
+
+                    if (Constant.EXCEL_FILES_SELECTION.equalsIgnoreCase(excelFilePath)) {
+                        JOptionPane.showMessageDialog(null, "Please select excel files or a folder.", "Warning", 2);
+                        return;
+                    }
+
+                    if (Constant.SAVE_FOLDER_SELECTION.equalsIgnoreCase(savingFolderPath)) {
+                        JOptionPane.showMessageDialog(null, "Please select a folder to save the PDF file.", "Warning", 2);
+                        return;
+                    }
+
+                    int confirmResult = JOptionPane.showConfirmDialog(null, "Start to generate?", "Prompt", 0);
+                    if (confirmResult == 1) {
+                        return;
+                    }
+
+                    // generate by selection
+                    MyService.genBySelection(academicYear, excelFilePath, savingFolderPath, selectedStr);
+
+                    Constant.logger.info("SUCCESS!!!");
+
+                    // ask if open file
+                    confirmResult = JOptionPane.showConfirmDialog(null, "PDF has been generated! Open it?", "Prompt", 0);
+                    if (confirmResult == 1) {
+                        return;
+                    }
+                    MyService.openFile(Constant.PDF_FILE_PATH);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Constant.logger.error(e.getMessage());
                 }
-
-                if ("Select a PDF type".equalsIgnoreCase(selectedStr)) {
-                    JOptionPane.showMessageDialog(null, "Please select a PDF type.", "Warning", 2);
-                    return;
-                }
-
-                if (Constant.EXCEL_FILES_SELECTION.equalsIgnoreCase(excelFilePath)) {
-                    JOptionPane.showMessageDialog(null, "Please select excel files or a folder.", "Warning", 2);
-                    return;
-                }
-
-                if (Constant.SAVE_FOLDER_SELECTION.equalsIgnoreCase(pdfDirPath)) {
-                    JOptionPane.showMessageDialog(null, "Please select a folder to save the PDF file.", "Warning", 2);
-                    return;
-                }
-
-                int confirmResult = JOptionPane.showConfirmDialog(null, "Start to generate?", "Prompt", 0);
-                if (confirmResult == 1) {
-                    return;
-                }
-
-                // generate by selection
-                MyService.genBySelection(academicYear, excelFilePath, pdfDirPath, selectedStr);
             }
         });
     }

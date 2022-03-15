@@ -161,7 +161,7 @@
         </constraints>
         <properties>
           <model>
-            <item value="Select a PDF type"/>
+            <item value="Select the type of PDF to generate"/>
             <item value="Project Descriptions for Students"/>
             <item value="Project Descriptions for Internal Check"/>
           </model>

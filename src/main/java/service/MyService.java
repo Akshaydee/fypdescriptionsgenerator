@@ -22,11 +22,11 @@ public class MyService {
     /**
      * Generate by selection<br>
      *
-     * @param [academicYear, excelFilePath, pdfDirPath, selectedStr]
+     * @param [academicYear, excelFilePath, savingFolderPath, selectedStr]
      * @return void
      * @author Zihao Long
      */
-    public static void genBySelection(String academicYear, String excelFilePath, String pdfDirPath, String selectedStr) {
+    public static void genBySelection(String academicYear, String excelFilePath, String savingFolderPath, String selectedStr) {
         try {
             Constant.ACADEMIC_YEAR = academicYear;
 
@@ -57,7 +57,7 @@ public class MyService {
             }
 
             // gen pdf absolute path
-            Constant.PDF_FILE_PATH = pdfDirPath + Constant.FILE_PATH_NOTATION + pdfFileName + ".pdf";
+            Constant.PDF_FILE_PATH = savingFolderPath + Constant.FILE_PATH_NOTATION + pdfFileName + ".pdf";
 
             Constant.logger.info("Reading excel file...");
 
@@ -70,21 +70,12 @@ public class MyService {
 
             // Generate pdf
             PdfService.genPdf(dataList);
-
-            Constant.logger.info("SUCCESS!!!");
-
-            // Ask if open file
-            int confirmResult = JOptionPane.showConfirmDialog(null, "PDF has been generated! Open it?", "Prompt", 0);
-            if (confirmResult == 1) {
-                return;
-            }
-            openFile(Constant.PDF_FILE_PATH);
         } catch (Exception e) {
             if (e instanceof BusinessException) {
                 JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-//            e.printStackTrace();
+            e.printStackTrace();
             Constant.logger.error(e.getMessage());
         }
     }
