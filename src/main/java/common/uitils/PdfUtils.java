@@ -1,5 +1,7 @@
 package common.uitils;
 
+import com.itextpdf.io.font.FontProgram;
+import com.itextpdf.io.font.FontProgramFactory;
 import com.itextpdf.io.font.PdfEncodings;
 import com.itextpdf.io.font.constants.StandardFonts;
 import com.itextpdf.kernel.colors.DeviceRgb;
@@ -12,9 +14,10 @@ import com.itextpdf.layout.property.BorderRadius;
 import com.itextpdf.layout.property.TextAlignment;
 import common.constant.Constant;
 import org.apache.commons.lang3.StringUtils;
-import service.PdfService;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * The pdf utils<br>
@@ -55,13 +58,30 @@ public class PdfUtils {
      */
     public static PdfFont genWingdingsFont () {
         try {
-            String projectPath = PdfService.class.getResource("/").toString();
-            String wingdingsFontPath = projectPath + Constant.FILE_PATH_NOTATION + "font" + Constant.FILE_PATH_NOTATION + "Wingdings.ttf";
-            return PdfFontFactory.createFont(wingdingsFontPath, PdfEncodings.IDENTITY_H, false);
+            InputStream fontInputSteam = PdfUtils.class.getResourceAsStream("/font/Wingdings.ttf");
+            FontProgram fontProgram = FontProgramFactory.createFont(PdfUtils.toByteArray(fontInputSteam));
+            return PdfFontFactory.createFont(fontProgram, PdfEncodings.IDENTITY_H, false);
         } catch (IOException e) {
             Constant.logger.error(e.toString());
             return null;
         }
+    }
+
+    /**
+     * InputStream to byte array<br>
+     *
+     * @param [input]
+     * @return byte[]
+     * @author Zihao Long
+     */
+    public static byte[] toByteArray(InputStream input) throws IOException {
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        byte[] buffer = new byte[4096];
+        int n = 0;
+        while (-1 != (n = input.read(buffer))) {
+            output.write(buffer, 0, n);
+        }
+        return output.toByteArray();
     }
 
     /**
