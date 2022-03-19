@@ -1,4 +1,4 @@
-package common.uitils;
+package common.utils;
 
 import com.itextpdf.io.font.FontProgram;
 import com.itextpdf.io.font.FontProgramFactory;

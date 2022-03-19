@@ -12,7 +12,7 @@ import com.itextpdf.layout.property.HorizontalAlignment;
 import com.itextpdf.layout.property.TextAlignment;
 import common.constant.Constant;
 import common.pojo.ProjectInfo;
-import common.uitils.PdfUtils;
+import common.utils.PdfUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
