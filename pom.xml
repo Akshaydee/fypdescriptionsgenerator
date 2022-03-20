@@ -61,6 +61,7 @@
     </dependencies>
 
     <build>
+        <finalName>FYP_Project_Descriptions_Generator</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -88,7 +89,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>gui.Frame</mainClass>
+                            <mainClass>gui.MyFrame</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
