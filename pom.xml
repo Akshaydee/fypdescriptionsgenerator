@@ -61,7 +61,7 @@
     </dependencies>
 
     <build>
-        <finalName>FYP_Project_Descriptions_Generator</finalName>
+        <finalName>FYP_Descriptions_Generator</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

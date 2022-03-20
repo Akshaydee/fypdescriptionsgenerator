@@ -54,7 +54,7 @@ public class MyFrame {
      */
     public static void main(String[] args) throws IOException {
         // init frame
-        JFrame frame = new JFrame("FYP Project Descriptions Generator");
+        JFrame frame = new JFrame("FYP Descriptions Generator");
         frame.setSize(575, 400);
         frame.setContentPane(new MyFrame().body);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

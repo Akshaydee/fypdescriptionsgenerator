@@ -14,6 +14,8 @@ $ Run test
 $ Package structure
     .
     ├── file -------------------------------- The file folder
+    │   ├── user manual
+    │   │   └── FYP Descriptions Generator User Manual.pdf
     │   ├── input file
     │   │   └── project_description.csv
     │   └── output file

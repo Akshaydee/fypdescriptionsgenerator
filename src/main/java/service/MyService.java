@@ -50,10 +50,10 @@ public class MyService {
             String pdfFileName = null;
             if ("Project Descriptions for Students".equalsIgnoreCase(selectedStr)) {
                 Constant.IS_STUDENT_DESC_TYPE = true;
-                pdfFileName = "CS_Projects_" + academicYear;
+                pdfFileName = "Project_Descriptions_for_Students_" + academicYear;
             } else if ("Project Descriptions for Internal Check".equalsIgnoreCase(selectedStr)) {
                 Constant.IS_INTERNAL_CHECK_TYPE = true;
-                pdfFileName = "Project_Descriptions_Computer_Science_" + academicYear;
+                pdfFileName = "Project_Descriptions_for_Internal_Check_" + academicYear;
             }
 
             // gen pdf absolute path
