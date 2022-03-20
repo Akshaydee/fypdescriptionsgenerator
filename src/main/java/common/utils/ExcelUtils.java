@@ -19,7 +19,7 @@ import java.lang.reflect.Field;
 import java.util.*;
 
 /**
- * The excel utils<br>
+ * The Excel utils<br>
  *
  * @author Zihao Long
  * @version 1.0, 2021-09-27 00:04
@@ -28,7 +28,7 @@ import java.util.*;
 public class ExcelUtils {
 
     /**
-     * Read excel or csv by path and return data list<br>
+     * Read Excel or csv by path and return data list<br>
      *
      * @param [filePath, titleRows, headerRows, pojoClass]
      * @return java.util.List<T>
@@ -67,18 +67,18 @@ public class ExcelUtils {
             }
 
             if (CollectionUtils.isEmpty(dataList)) {
-                throw new BusinessException("The excel content is empty.");
+                throw new BusinessException("The Excel content is empty.");
             }
             return dataList;
         } catch (NoSuchElementException e) {
-            throw new BusinessException("The excel content is empty.");
+            throw new BusinessException("The Excel content is empty.");
         } catch (FileNotFoundException e) {
-            throw new BusinessException("The excel file is not found.");
+            throw new BusinessException("The Excel file is not found.");
         }
     }
 
     /**
-     * Import excel and generate data for PDF<br>
+     * Import Excel and generate data for PDF<br>
      *
      * @param [filePath, titleRows, headerRows]
      * @return java.util.List<common.pojo.ProjectInfo>

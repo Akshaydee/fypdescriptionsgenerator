@@ -30,6 +30,7 @@
             <version>1.7.25</version>
             <scope>compile</scope>
         </dependency>
+        <!-- https://github.com/jueyue/easypoi -->
         <dependency>
             <groupId>cn.afterturn</groupId>
             <artifactId>easypoi-base</artifactId>

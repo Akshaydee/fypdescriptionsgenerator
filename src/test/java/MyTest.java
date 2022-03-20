@@ -81,7 +81,7 @@ public class MyTest {
 
     /**
      * Fault model test<br>
-     * expected exception: java.lang.RuntimeException: No data found in the excel file.<br>
+     * expected exception: java.lang.RuntimeException: No data found in the Excel file.<br>
      *
      * @param [id, academicYear, excelFilePath, savingFolderPath, selectedStr]
      * @return void

@@ -59,13 +59,13 @@ public class MyService {
             // gen pdf absolute path
             Constant.PDF_FILE_PATH = savingFolderPath + Constant.FILE_PATH_NOTATION + pdfFileName + ".pdf";
 
-            Constant.logger.info("Reading excel file...");
+            Constant.logger.info("Reading Excel file...");
 
-            // Read data from excel
+            // Read data from Excel
             List<ProjectInfo> dataList = ExcelUtils.importExcelForPdf(excelFilePath, 0, 1);
 
 
-            Constant.logger.info("Successfully parsed excel data...");
+            Constant.logger.info("Successfully parsed Excel data...");
             Constant.logger.info("Generating PDF file...");
 
             // Generate pdf
@@ -99,7 +99,7 @@ public class MyService {
     }
 
     /**
-     * Filter excel file<br>
+     * Filter Excel file<br>
      *
      * @param [file]
      * @return boolean
