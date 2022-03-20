@@ -52,8 +52,8 @@ public class MyTest {
      */
     private static Object[][] faultModelData = new Object[][]{
             // id, academicYear, excelFilePath, savingFolderPath, selectedStr
-            {"DT5*", "2022", "/Users/aihuishou/Desktop/test2/input_excel/empty_data.xlsx", "/Users/aihuishou/Desktop/test2/output_files/DT5", "Generate a PDF"},
-            {"DT6*", "2022", "/Users/aihuishou/Desktop/test2/empty_folder", "/Users/aihuishou/Desktop/test2/output_files/DT6", "Generate a PDF"},
+            {"DT5*", "2022", "/Users/aihuishou/Desktop/test2/input_excel/empty_data.xlsx", "/Users/aihuishou/Desktop/test2/output_files/DT5", "Project Descriptions for Internal Check"},
+            {"DT6*", "2022", "/Users/aihuishou/Desktop/test2/empty_folder", "/Users/aihuishou/Desktop/test2/output_files/DT6", "Project Descriptions for Internal Check"},
     };
 
     @DataProvider(name = "regularData")
