@@ -19,13 +19,13 @@ import java.util.ResourceBundle;
 import java.util.Scanner;
 
 /**
- * The Frame class<br>
+ * The MyFrame class<br>
  *
  * @author Zihao Long
  * @version 1.0, 2021年09月26日 03:28
  * @since excelToPdf 0.0.1
  */
-public class Frame {
+public class MyFrame {
 
     /**
      * GUI info
@@ -56,7 +56,7 @@ public class Frame {
         // init frame
         JFrame frame = new JFrame("FYP Project Descriptions Generator");
         frame.setSize(575, 400);
-        frame.setContentPane(new Frame().body);
+        frame.setContentPane(new MyFrame().body);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
 
@@ -70,7 +70,7 @@ public class Frame {
         frame.setLocation(screenWidth - width / 2, screenHeight - height / 2);
     }
 
-    public Frame() throws IOException {
+    public MyFrame() throws IOException {
 
         // log setting
         Logger root = Logger.getRootLogger();

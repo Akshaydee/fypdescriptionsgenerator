@@ -59,7 +59,7 @@ public class PdfService {
         Document doc = new Document(pdfDoc);
         doc.setMargins(10, 50, 0, 50);
 
-        String pageTitle = "Project descriptions Computer Science " + Constant.ACADEMIC_YEAR;
+        String pageTitle = "Project Descriptions Computer Science " + Constant.ACADEMIC_YEAR;
         // define solid border
         SolidBorder solidBorder = new SolidBorder(new DeviceRgb(218, 218, 218), 1f);
         for (int i = 0; i < dataList.size(); i++) {

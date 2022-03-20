@@ -1,6 +1,6 @@
 package common.constant;
 
-import gui.Frame;
+import gui.MyFrame;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
@@ -63,7 +63,7 @@ public class Constant {
      * @return 
      * @author Zihao Long
      */
-    public static Logger logger = Logger.getLogger(Frame.class);
+    public static Logger logger = Logger.getLogger(MyFrame.class);
     
     /**
      * The project no prefix
