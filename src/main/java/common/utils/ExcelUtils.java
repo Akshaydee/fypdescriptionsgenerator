@@ -52,7 +52,6 @@ public class ExcelUtils {
             }
             List<T> dataList = new ArrayList<>();
             for (File file : files) {
-                System.out.println(file.getPath());
                 if (file.getPath().endsWith(".csv")) {
                     CsvImportParams params = new CsvImportParams();
                     params.setTitleRows(titleRows);
