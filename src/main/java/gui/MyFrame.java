@@ -3,6 +3,7 @@ package gui;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import common.constant.Constant;
+import common.exception.BusinessException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Appender;
 import org.apache.log4j.Logger;
@@ -151,7 +152,9 @@ public class MyFrame {
                         return;
                     }
                     MyService.openFile(Constant.PDF_FILE_PATH);
-                } catch (IOException e) {
+                } catch (BusinessException e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                } catch (Exception e) {
                     e.printStackTrace();
                     Constant.logger.error(e.getMessage());
                 }

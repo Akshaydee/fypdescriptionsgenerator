@@ -5,7 +5,6 @@ import common.exception.BusinessException;
 import common.pojo.ProjectInfo;
 import common.utils.ExcelUtils;
 
-import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -26,58 +25,49 @@ public class MyService {
      * @return void
      * @author Zihao Long
      */
-    public static void genBySelection(String academicYear, String excelFilePath, String savingFolderPath, String selectedStr) {
-        try {
-            Constant.ACADEMIC_YEAR = academicYear;
+    public static void genBySelection(String academicYear, String excelFilePath, String savingFolderPath, String selectedStr) throws Exception {
+        Constant.ACADEMIC_YEAR = academicYear;
 
-            // get system info
-            if (Constant.FILE_PATH_NOTATION == null) {
-                String osName = System.getProperty("os.name");
-                if (osName.startsWith("Windows")) {
-                    Constant.IS_WINDOWS = true;
-                    Constant.FILE_PATH_NOTATION = "\\";
-                } else {
-                    // MacOs, linux
-                    Constant.IS_MAC_OS = true;
-                    Constant.FILE_PATH_NOTATION = "/";
-                }
+        // get system info
+        if (Constant.FILE_PATH_NOTATION == null) {
+            String osName = System.getProperty("os.name");
+            if (osName.startsWith("Windows")) {
+                Constant.IS_WINDOWS = true;
+                Constant.FILE_PATH_NOTATION = "\\";
+            } else {
+                // MacOs, linux
+                Constant.IS_MAC_OS = true;
+                Constant.FILE_PATH_NOTATION = "/";
             }
-
-            // Reset type
-            Constant.IS_STUDENT_DESC_TYPE = false;
-            Constant.IS_INTERNAL_CHECK_TYPE = false;
-
-            String pdfFileName = null;
-            if ("Project Descriptions for Students".equalsIgnoreCase(selectedStr)) {
-                Constant.IS_STUDENT_DESC_TYPE = true;
-                pdfFileName = "Project_Descriptions_for_Students_" + academicYear;
-            } else if ("Project Descriptions for Internal Check".equalsIgnoreCase(selectedStr)) {
-                Constant.IS_INTERNAL_CHECK_TYPE = true;
-                pdfFileName = "Project_Descriptions_for_Internal_Check_" + academicYear;
-            }
-
-            // gen pdf absolute path
-            Constant.PDF_FILE_PATH = savingFolderPath + Constant.FILE_PATH_NOTATION + pdfFileName + ".pdf";
-
-            Constant.logger.info("Reading Excel file...");
-
-            // Read data from Excel
-            List<ProjectInfo> dataList = ExcelUtils.importExcelForPdf(excelFilePath, 0, 1);
-
-
-            Constant.logger.info("Successfully parsed Excel data...");
-            Constant.logger.info("Generating PDF file...");
-
-            // Generate pdf
-            PdfService.genPdf(dataList);
-        } catch (Exception e) {
-            if (e instanceof BusinessException) {
-                JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-            e.printStackTrace();
-            Constant.logger.error(e.getMessage());
         }
+
+        // Reset type
+        Constant.IS_STUDENT_DESC_TYPE = false;
+        Constant.IS_INTERNAL_CHECK_TYPE = false;
+
+        String pdfFileName = null;
+        if ("Project Descriptions for Students".equalsIgnoreCase(selectedStr)) {
+            Constant.IS_STUDENT_DESC_TYPE = true;
+            pdfFileName = "Project_Descriptions_for_Students_" + academicYear;
+        } else if ("Project Descriptions for Internal Check".equalsIgnoreCase(selectedStr)) {
+            Constant.IS_INTERNAL_CHECK_TYPE = true;
+            pdfFileName = "Project_Descriptions_for_Internal_Check_" + academicYear;
+        }
+
+        // gen pdf absolute path
+        Constant.PDF_FILE_PATH = savingFolderPath + Constant.FILE_PATH_NOTATION + pdfFileName + ".pdf";
+
+        Constant.logger.info("Reading Excel file...");
+
+        // Read data from Excel
+        List<ProjectInfo> dataList = ExcelUtils.importExcelForPdf(excelFilePath, 0, 1);
+
+
+        Constant.logger.info("Successfully parsed Excel data...");
+        Constant.logger.info("Generating PDF file...");
+
+        // Generate pdf
+        PdfService.genPdf(dataList);
     }
 
     /**
