@@ -121,8 +121,8 @@ public class MyFrame {
                         return;
                     }
 
-                    if ("Select a PDF type".equalsIgnoreCase(selectedStr)) {
-                        JOptionPane.showMessageDialog(null, "Please select a PDF type.", "Warning", 2);
+                    if ("Select the type of PDF to generate".equalsIgnoreCase(selectedStr)) {
+                        JOptionPane.showMessageDialog(null, "Please select the type of PDF to generate.", "Warning", 2);
                         return;
                     }
 
