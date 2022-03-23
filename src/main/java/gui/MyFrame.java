@@ -146,12 +146,7 @@ public class MyFrame {
 
                     Constant.logger.info("SUCCESS!!!");
 
-                    // ask if open file
-                    confirmResult = JOptionPane.showConfirmDialog(null, "File has been generated! Open it?", "Prompt", 0);
-                    if (confirmResult == 1) {
-                        return;
-                    }
-                    MyService.openFile(Constant.PDF_FILE_PATH);
+                    JOptionPane.showMessageDialog(null, "File has been generated!", "Tips", JOptionPane.INFORMATION_MESSAGE);
                 } catch (BusinessException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage(), "Business Error", JOptionPane.ERROR_MESSAGE);
                 } catch (Exception e) {

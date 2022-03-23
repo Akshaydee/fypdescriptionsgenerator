@@ -1,12 +1,10 @@
 package service;
 
 import common.constant.Constant;
-import common.exception.BusinessException;
 import common.pojo.ProjectInfo;
 import common.utils.ExcelUtils;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -68,24 +66,6 @@ public class MyService {
 
         // Generate pdf
         PdfService.genPdf(dataList);
-    }
-
-    /**
-     * Open file by command line<br>
-     *
-     * @param []
-     * @return void
-     * @author Zihao Long
-     */
-    public static void openFile(String filePath) throws IOException {
-        if (Constant.IS_WINDOWS) {
-            Runtime.getRuntime().exec("explorer.exe /select, " + filePath);
-            return;
-        } else if (Constant.IS_MAC_OS) {
-            Runtime.getRuntime().exec("open " + filePath);
-            return;
-        }
-        throw new BusinessException("Unsupported system");
     }
 
     /**
