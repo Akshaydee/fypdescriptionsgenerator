@@ -9,6 +9,8 @@ The projects are written in Java language and managed with [Maven](https://maven
 
 This one is the <strong>FYP Descriptions Generator</strong> project.
 
+[A user manual is available as well.](https://longporo.slite.com/api/s/note/Vv0n9Q3RG14-779k81qZGy/FYP-Descriptions-Generator-User-Manual)
+
 The libraries used are shown as below.
 
 <img width="731" alt="library" src="https://user-images.githubusercontent.com/42689061/170313044-d6ed76ae-2915-42c0-908c-410af7dc7dde.png">
