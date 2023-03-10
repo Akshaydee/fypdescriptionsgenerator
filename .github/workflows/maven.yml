@@ -31,3 +31,5 @@ jobs:
       run: mvn -B install --file pom.xml
     - name: Analyze with SonarQube
       run: mvn clean verify sonar:sonar -Dsonar.projectKey=generator -Dsonar.host.url=http://10.24.42.90:9000 -Dsonar.login=sqp_e62301a3bcf1fe9fff500b38f79f173c5c7d7b6f
+      env:
+          GITHUB_TOKEN: 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
