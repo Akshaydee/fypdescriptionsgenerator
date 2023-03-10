@@ -12,6 +12,12 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
+    <pluginRepositories>
+      <pluginRepository> 
+            <id>maven2</id> 
+            <url>https://repo.maven.apache.org/maven2/</url> 
+      </pluginRepository> 
+    </pluginRepositories>
 
     <dependencies>
         <dependency>
